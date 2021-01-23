@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const authJWT = require('./helpers/jwt');
 const errorHandler = require('./helpers/error-handler');
+var multer = require('multer');
+var forms = multer();
+
 
 require('dotenv/config');
 
@@ -26,6 +29,8 @@ const ordersRouter = require('./routers/orders');
 
 //middleware
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(forms.array()); 
 app.use(morgan('tiny'));
 app.use(cors());
 app.options('*', cors);
